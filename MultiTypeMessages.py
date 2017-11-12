@@ -28,7 +28,7 @@ def getRCToken(ENV,userName,extNum,passWord,grant_Type): #定义方法，传env,
     rc_access_token_data = "";
     if getRCTokenresponse.ok: #如果请求是成功，取得acess_token, 并做base64位加密
         rc_access_token_data =str(base64.b64encode(bytes(rcTokenText,encoding="utf-8")),encoding="utf-8")
-        #print(rc_access_token_data)
+        print(rc_access_token_data)
     else:
         print("failed to get access_token, the reason is" + json.dumps(rcTokenJsonText)) #
     return rc_access_token_data
@@ -185,12 +185,12 @@ def createTeam(tk, portID, creator_id,email_friendly_abbreviation,members,set_ab
 def run(ENV,userName,extNum,passWord,portID, createTeamCount,messageCount,type):
     rc_access_token = getRCToken(ENV,userName,extNum,passWord,'password')
     glip_token = glipLogin(rc_access_token, portID)
-    teamName = "team"+ "_No."
+    teamName = "teamnnnnnn"+str(time.time())+"_No."
     for index in range(0, createTeamCount):
         members = [glip_token['creator_id'], 241090562 + index]
         createTeam(glip_token['tk'],portID, glip_token['creator_id'], teamName + str(index), members, teamName + str(index),messageCount,type)
         time.sleep(0.15)
 
 
-run('http://api-up.lab.rcch.ringcentral.com','18002491122','106','Test!123','23304',500,25, 'event')
+run('http://api-up.lab.rcch.ringcentral.com','18002491122','106','Test!123','23304',1,1, 'event')
 #run('http://api-up.lab.rcch.ringcentral.com','18003396668','102','Test!123','23304',50,50, 'task')
