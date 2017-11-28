@@ -7,7 +7,7 @@ header = {'content-type': 'application/json'}
 source = 'mobile'
 
 def getGlipBaseUrl(portID):
-    glipBaseUrl= "https://aws13-g04-uds01.asialab.glip.net:" + portID
+    glipBaseUrl= "https://aws21-g43-udp01.asialab.glip.net:" + portID
     return glipBaseUrl
 
 
@@ -18,6 +18,8 @@ def getRCToken(ENV,userName,extNum,passWord,grant_Type): #定义方法，传env,
         rcSecurtyCode = 'TWtDZGxTVnFRMDZINmk3S1ljdjliZzo1X3RGQlhCUVRMV2FWY1BGNjFMVUdnbmdCZmM4S0dRQ2FaMF9VVHc4MHZzdw=='
     elif ENV == 'https://api.ringcentral.com':
         rcSecurtyCode = 'MDJiNzI5MTgwMDRhOWVkMzM2YjlDRUJDNDhlNjAzOGJlM2YyMTk2NDI2MjFBODA0MjA3MmY5N2MyQzg0MkZBQTpGQkQzRENBMDk5N2JFQTlCMGI4MWY4NTZlY2NiOWNkMmIxOWQ2MDYwNzc3NmE4NjFDOUM0N2RiNWVkMDU0ODcy'
+    elif ENV == 'https://platform.devtest.ringcentral.com':
+        rcSecurtyCode = 'TWtDZGxTVnFRMDZINmk3S1ljdjliZzo1X3RGQlhCUVRMV2FWY1BGNjFMVUdnbmdCZmM4S0dRQ2FaMF9VVHc4MHZzdw=='
     rcAuthCode = 'Basic ' + rcSecurtyCode #定义字符串变量
     payload = {'username':userName, 'password':passWord, 'extension':extNum,'grant_type':grant_Type} #定义一个json的map结构的对象（key：value）
     header = {'content-type':'application/x-www-form-urlencoded','authorization':rcAuthCode} #定义一个json的map结构的对象（key：value）
@@ -185,12 +187,13 @@ def createTeam(tk, portID, creator_id,email_friendly_abbreviation,members,set_ab
 def run(ENV,userName,extNum,passWord,portID, createTeamCount,messageCount,type):
     rc_access_token = getRCToken(ENV,userName,extNum,passWord,'password')
     glip_token = glipLogin(rc_access_token, portID)
-    teamName = "teamnnnnnn"+str(time.time())+"_No."
+    #teamName = "AdelaTeam"+str(time.time())+"_No."
+    teamName = "TeamforEvent"+"_No."
     for index in range(0, createTeamCount):
         members = [glip_token['creator_id'], 241090562 + index]
         createTeam(glip_token['tk'],portID, glip_token['creator_id'], teamName + str(index), members, teamName + str(index),messageCount,type)
         time.sleep(0.15)
 
 
-run('http://api-up.lab.rcch.ringcentral.com','18002491122','106','Test!123','23304',1,1, 'event')
+run('https://platform.devtest.ringcentral.com','18582571753','101','Test!123','32004',1000,30, 'event')
 #run('http://api-up.lab.rcch.ringcentral.com','18003396668','102','Test!123','23304',50,50, 'task')
