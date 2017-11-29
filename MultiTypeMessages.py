@@ -188,12 +188,12 @@ def run(ENV,userName,extNum,passWord,portID, createTeamCount,messageCount,type):
     rc_access_token = getRCToken(ENV,userName,extNum,passWord,'password')
     glip_token = glipLogin(rc_access_token, portID)
     #teamName = "AdelaTeam"+str(time.time())+"_No."
-    teamName = "TeamEvent"+"_No."
+    teamName = "TeamForNote1"+"_No."
     for index in range(0, createTeamCount):
         members = [glip_token['creator_id'], 241090562 + index]
         createTeam(glip_token['tk'],portID, glip_token['creator_id'], teamName + str(index), members, teamName + str(index),messageCount,type)
         time.sleep(0.15)
 
 
-run('https://platform.devtest.ringcentral.com','18582571753','101','Test!123','32004',1000,30, 'event')
+run('https://platform.devtest.ringcentral.com','18582571753','101','Test!123','32004',50,30, 'note')
 #run('http://api-up.lab.rcch.ringcentral.com','18003396668','102','Test!123','23304',50,50, 'task')
