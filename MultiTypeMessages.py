@@ -195,5 +195,5 @@ def run(ENV,userName,extNum,passWord,portID, createTeamCount,messageCount,type):
         time.sleep(0.15)
 
 
-run('https://platform.devtest.ringcentral.com','18582571753','101','Test!123','32004',50,30, 'task')
+run('https://platform.devtest.ringcentral.com','18582571753','101','Test!123','32004',150,30, 'task')
 #run('http://api-up.lab.rcch.ringcentral.com','18003396668','102','Test!123','23304',50,50, 'task')
